@@ -6,9 +6,14 @@ class DouglasPeucker(object):
     def __init__(self):
         pass
     
-    def compress(self, unfn, wfn):
+    def compress(self, unfn, wfn, delta):
         Q = np.genfromtxt(unfn, delimiter=',')
-        indicies = dp._douglas_peucker(Q, 0, len(Q)-1, delta)
+        indicies = self._douglas_peucker(Q, 0, len(Q)-1, delta)
+        
+#         print len(Q), 'data points before compressing'
+#         print len(indicies), 'data points after compressing'
+#         print 'Compress rate:', 1-float(len(indicies))/len(Q)
+        
         with open(wfn, 'w') as f:
             for i in indicies:
                 f.write(str(Q[i][0]) + ',' + str(Q[i][1]) + '\n')
@@ -56,4 +61,4 @@ if __name__ == "__main__":
     print len(indicies), 'data points after compressing'
     print 'Compress rate:', 1-float(len(indicies))/len(Q)
     
-    dp.compress('Data/Uncompressed/cycling_trajectory_20120916.txt', 'Data/Compressed/compressed_cycling_trajectory_20120916.txt')
+    dp.compress('Data/Uncompressed/cycling_trajectory_20120916.txt', 'Data/Compressed/compressed_cycling_trajectory_20120916.txt', delta)
