@@ -2,17 +2,27 @@ import numpy as np
 from math import sqrt
 
 class DouglasPeucker(object):
+    """This class implements the Douglas Peucker algorithm for spatially compressing trajectories. 
+    The user needs to specify the comoresssion threshold.
+    """
     
     def __init__(self):
         pass
     
     def compress(self, unfn, wfn, delta):
+        """Keyword arguments:
+        unfn -- the to be compressed trajectory data file
+        wfn -- the compressed trajectory data file
+        delta -- the compression threshold
+        """
         Q = np.genfromtxt(unfn, delimiter=',')
         indicies = self._douglas_peucker(Q, 0, len(Q)-1, delta)
         
-#         print len(Q), 'data points before compressing'
-#         print len(indicies), 'data points after compressing'
-#         print 'Compress rate:', 1-float(len(indicies))/len(Q)
+        with open('log.txt', 'w') as f:
+            f.write('Compression summary for file: ' + unfn + '\n')
+            f.write('\t- ' + str(len(Q)) + ' data points before compressing\n')
+            f.write('\t- ' + str(len(indicies)) + ' data points after compressing\n')
+            f.write('\t- ' + 'Compression rate: ' + str(1-float(len(indicies))/len(Q)) + '\n')
         
         with open(wfn, 'w') as f:
             for i in indicies:
@@ -25,7 +35,7 @@ class DouglasPeucker(object):
         Q -- query trajectory (matrix)
         s -- start position
         t -- end position
-        delta -- the threshold
+        delta -- the compression threshold
         """
         indecies = []
         
