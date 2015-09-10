@@ -1,4 +1,4 @@
 Compression summary for file: Data/Uncompressed/cycling_trajectory_20120916.txt
 	- 2684 data points before compressing
-	- 384 data points after compressing
-	- Compression rate: 0.856929955291
+	- 193 data points after compressing
+	- Compression rate: 0.928092399404
