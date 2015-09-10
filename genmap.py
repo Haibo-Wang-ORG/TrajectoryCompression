@@ -20,8 +20,8 @@ class GenerateGoogleMap(object):
         with open(wfn, 'w') as f:
             f.write(self._gen_header())
             f.write(self._js_initmap(zoom, clat, clng))
-            for idx in range(len(files)):
-                f.write(self._gen_map_polyline(files[idx], idx, colors[idx]))
+            for idx, fn in enumerate(files):
+                f.write(self._gen_map_polyline(fn, idx, colors[idx]))
             f.write(self._gen_tail())
         
     def _gen_map_polyline(self, fn, idx, strokColor):
