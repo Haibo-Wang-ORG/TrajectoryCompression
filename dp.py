@@ -49,6 +49,7 @@ class DouglasPeucker(object):
             L1 = self._douglas_peucker(Q, s, idx, delta)
             L2 = self._douglas_peucker(Q, idx, t, delta)
             [indecies.append(x) for x in L1]
+            indecies.pop(-1) # remove the duplicated element
             [indecies.append(x) for x in L2]
         else:
             indecies.append(s)
