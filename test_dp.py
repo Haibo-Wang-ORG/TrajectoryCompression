@@ -14,7 +14,13 @@ class DPTestCase(unittest.TestCase):
     _dp = DouglasPeucker()
     
     def test_is_uncompressed_douglas_peucker(self):
-        self.assertEqual(range(5), self._dp._douglas_peucker(self._Q, 0, len(self._Q)-1, 0))
+        self.assertEqual(range(len(self._Q)), self._dp._douglas_peucker(self._Q, 0, len(self._Q)-1, 0))
+        
+    def test_is_maximum_compressed_douglas_peucker(self):
+        self.assertEqual([0,len(self._Q)-1], self._dp._douglas_peucker(self._Q, 0, len(self._Q)-1, float('inf')))
+        
+    def test_is_partially_compressed_douglas_peucker(self):
+        self.assertEqual([0,2,len(self._Q)-1], self._dp._douglas_peucker(self._Q, 0, len(self._Q)-1, 1.5))
         
 if __name__ == '__main__':
     unittest.main()
